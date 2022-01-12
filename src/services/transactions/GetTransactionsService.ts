@@ -1,0 +1,26 @@
+import prismaClient from "../../prisma";
+
+class GetTransactionsService {
+  async execute(user_id: string) {
+    try {
+      console.log(user_id);
+      const transactions = await prismaClient.transaction.findMany({
+        orderBy: {
+          created_at: "desc",
+        },
+        include: {
+          user: true,
+        },
+        where: {
+          user_id: user_id,
+        },
+      });
+
+      return transactions;
+    } catch (error) {
+      return error;
+    }
+  }
+}
+
+export { GetTransactionsService };
