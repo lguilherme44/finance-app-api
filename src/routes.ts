@@ -15,6 +15,10 @@ import { IncomeSummaryController } from "./controllers/summary/IncomeSummaryCont
 
 const router = Router();
 
+router.get("/", (request, response) => {
+  return response.json("API Funcionando");
+});
+
 router.get("/github", (request, response) => {
   response.redirect(
     `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
