@@ -3,7 +3,6 @@ import prismaClient from "../../prisma";
 class GetTransactionsService {
   async execute(user_id: string) {
     try {
-      console.log(user_id);
       const transactions = await prismaClient.transaction.findMany({
         orderBy: {
           created_at: "desc",
