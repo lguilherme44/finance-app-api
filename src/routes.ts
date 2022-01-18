@@ -16,7 +16,7 @@ import { IncomeSummaryController } from "./controllers/summary/IncomeSummaryCont
 const router = Router();
 
 router.get("/", (request, response) => {
-  return response.json("API Funcionando");
+  return response.json(`API Funcionando, MODO: ${process.env.NODE_ENV}`);
 });
 
 router.get("/github", (request, response) => {
