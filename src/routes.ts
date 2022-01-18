@@ -1,9 +1,7 @@
 import { Router } from "express";
 import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
-import { CreateMessageController } from "./controllers/CreateMessageController";
 import { CreateTransactionController } from "./controllers/transactions/CreateTransactionController";
 import { DeleteTransactionController } from "./controllers/transactions/DeleteTransactionController";
-import { GetLast3MessagesController } from "./controllers/GetLast3MessagesController";
 import { GetTransactionsController } from "./controllers/transactions/GetTransactionsController";
 import { ProfileUserController } from "./controllers/ProfileUserController";
 import { ensureAuthenticate } from "./middleware/ensureAuthenticate";
@@ -37,14 +35,6 @@ router.get("/signin/callback", (request, response) => {
 });
 
 router.post("/authenticate", new AuthenticateUserController().handle);
-
-router.post(
-  "/messages",
-  ensureAuthenticate,
-  new CreateMessageController().handle
-);
-
-router.get("/messages/last3", new GetLast3MessagesController().handle);
 
 router.get("/profile", ensureAuthenticate, new ProfileUserController().handle);
 

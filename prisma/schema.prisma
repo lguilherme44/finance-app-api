@@ -1,6 +1,6 @@
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "postgresql"
+  url      = "postgres://bbeuuahroldxid:c9bce0139672c3e7e516782ee6a35881a27b7791be3bed68ba51f63f62931ef1@ec2-3-232-22-121.compute-1.amazonaws.com:5432/d6v6343845b6gp"
 }
 
 generator client {
@@ -14,28 +14,16 @@ model User {
   avatar_url String
   login      String
 
-  messages     Message[]
   transactions Transaction[]
   @@map("users")
 }
 
-model Message {
-  id         String   @id @default(uuid())
-  text       String
-  created_at DateTime @default(now())
-
-  user    User   @relation(fields: [user_id], references: [id])
-  user_id String
-  @@map("messages")
-}
-
 model Transaction {
-  id          String   @id @default(uuid())
+  id          String @id @default(uuid())
   description String
   value       Float
   date        String
   type        String
-  created_at  DateTime @default(now())
 
   user    User   @relation(fields: [user_id], references: [id])
   user_id String
