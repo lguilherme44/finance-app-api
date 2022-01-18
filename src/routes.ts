@@ -20,8 +20,13 @@ router.get("/", (request, response) => {
 });
 
 router.get("/github", (request, response) => {
+  const ClientID =
+    process.env.NODE_ENV === "dev"
+      ? process.env.GITHUB_CLIENT_ID_DEV
+      : process.env.GITHUB_CLIENT_ID;
+
   response.redirect(
-    `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}`
+    `https://github.com/login/oauth/authorize?client_id=${ClientID}`
   );
 });
 
