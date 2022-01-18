@@ -5,7 +5,7 @@ class GetTransactionsService {
     try {
       const transactions = await prismaClient.transaction.findMany({
         orderBy: {
-          created_at: "desc",
+          type: "desc",
         },
         include: {
           user: true,
