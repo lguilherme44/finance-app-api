@@ -8,11 +8,10 @@ generator client {
 }
 
 model User {
-  id         String @id @default(uuid())
-  name       String
-  github_id  Int
-  avatar_url String
-  login      String
+  id     String @id @default(uuid())
+  name   String
+  email  String
+  avatar String
 
   transactions Transaction[]
   @@map("users")
