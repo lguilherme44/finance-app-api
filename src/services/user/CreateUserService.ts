@@ -13,10 +13,10 @@ class CreateUserService {
         data: { name, email, avatar },
       });
 
-      return user;
+      return { data: user };
     }
 
-    return userExist;
+    return { data: userExist };
   }
 }
 

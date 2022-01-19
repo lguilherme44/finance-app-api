@@ -21,25 +21,25 @@ router.post("/authenticate", new CreateUserController().handle);
 /** summary */
 router.get(
   "/summary/income",
-  ensureAuthenticate,
+  // ensureAuthenticate,
   new IncomeSummaryController().handle
 );
 router.get(
   "/summary/expense",
-  ensureAuthenticate,
+  // ensureAuthenticate,
   new ExpenseSummaryController().handle
 );
 
 /** transaction */
 router.get(
   "/transactions",
-  ensureAuthenticate,
+  // ensureAuthenticate,
   new GetTransactionsController().handle
 );
 
 router.post(
   "/transaction",
-  ensureAuthenticate,
+  // ensureAuthenticate,
   new CreateTransactionController().handle
 );
 
