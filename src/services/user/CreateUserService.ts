@@ -15,6 +15,8 @@ class CreateUserService {
 
       return user;
     }
+
+    return userExist;
   }
 }
 
