@@ -1,15 +1,18 @@
 import { Router } from "express";
-import { AuthenticateUserController } from "./controllers/AuthenticateUserController";
+
+/** transactions */
 import { CreateTransactionController } from "./controllers/transactions/CreateTransactionController";
 import { DeleteTransactionController } from "./controllers/transactions/DeleteTransactionController";
 import { GetTransactionsController } from "./controllers/transactions/GetTransactionsController";
-import { ProfileUserController } from "./controllers/ProfileUserController";
-import { ensureAuthenticate } from "./middleware/ensureAuthenticate";
 import { UpdateTransactionsController } from "./controllers/transactions/UpdateTransactionsController";
+
+/** middleware */
+import { ensureAuthenticate } from "./middleware/ensureAuthenticate";
 
 /** summary */
 import { ExpenseSummaryController } from "./controllers/summary/ExpenseSummaryController";
 import { IncomeSummaryController } from "./controllers/summary/IncomeSummaryController";
+import { CreateUserController } from "./controllers/user/CreateUserController";
 
 const router = Router();
 
@@ -17,26 +20,7 @@ router.get("/", (request, response) => {
   return response.json(`API Funcionando, MODO: ${process.env.NODE_ENV}`);
 });
 
-router.get("/github", (request, response) => {
-  const ClientID =
-    process.env.NODE_ENV === "dev"
-      ? process.env.GITHUB_CLIENT_ID_DEV
-      : process.env.GITHUB_CLIENT_ID;
-
-  response.redirect(
-    `https://github.com/login/oauth/authorize?client_id=${ClientID}`
-  );
-});
-
-router.get("/signin/callback", (request, response) => {
-  const { code } = request.query;
-
-  return response.json({ code: code });
-});
-
-router.post("/authenticate", new AuthenticateUserController().handle);
-
-router.get("/profile", ensureAuthenticate, new ProfileUserController().handle);
+router.post("/user/create", new CreateUserController().handle);
 
 /** summary */
 router.get(

@@ -3,11 +3,11 @@ import { IncomeSummaryService } from "../../services/summary/IncomeSummaryServic
 
 class IncomeSummaryController {
   async handle(request: Request, response: Response) {
-    const { user_id } = request;
+    const { email } = request.body;
 
     const transaction = new IncomeSummaryService();
 
-    const result = await transaction.execute(user_id);
+    const result = await transaction.execute(email);
 
     return response.json(result);
   }

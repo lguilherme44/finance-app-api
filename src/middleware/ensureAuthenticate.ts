@@ -12,6 +12,8 @@ export function ensureAuthenticate(
 ) {
   const authToken = request.headers.authorization;
 
+  // console.log(authToken);
+
   if (!authToken) {
     return response.status(401).json({
       errorCode: "token.invalid",

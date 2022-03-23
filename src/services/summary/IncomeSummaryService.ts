@@ -1,14 +1,14 @@
 import prismaClient from "../../prisma";
 
 class IncomeSummaryService {
-  async execute(user_id: string) {
+  async execute(email: string) {
     try {
       const transactions = await prismaClient.transaction.groupBy({
         by: ["type"],
         where: {
           type: "income",
           user: {
-            id: user_id,
+            id: email,
           },
         },
         _sum: {
