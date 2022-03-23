@@ -9,6 +9,7 @@ class CreateUserController {
 
     const result = await user.execute(name, email, avatar);
 
+    console.log(result);
     return response.json(result);
   }
 }

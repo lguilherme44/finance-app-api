@@ -1,3 +1,4 @@
+import { sign } from "jsonwebtoken";
 import prismaClient from "../../prisma";
 
 class CreateUserService {
@@ -16,7 +17,21 @@ class CreateUserService {
       return { data: user };
     }
 
-    return { data: userExist };
+    const token = sign(
+      {
+        user: {
+          name: userExist.name,
+          avatar: userExist.avatar,
+          id: userExist.id,
+        },
+      },
+      process.env.JWT_SECRET,
+      {
+        subject: userExist.id,
+        expiresIn: "1d",
+      }
+    );
+    return { token, userExist };
   }
 }
 

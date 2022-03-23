@@ -1,9 +1,13 @@
 import { Router } from "express";
+
+/** transactions */
 import { CreateTransactionController } from "./controllers/transactions/CreateTransactionController";
 import { DeleteTransactionController } from "./controllers/transactions/DeleteTransactionController";
 import { GetTransactionsController } from "./controllers/transactions/GetTransactionsController";
-import { ensureAuthenticate } from "./middleware/ensureAuthenticate";
 import { UpdateTransactionsController } from "./controllers/transactions/UpdateTransactionsController";
+
+/** middleware */
+import { ensureAuthenticate } from "./middleware/ensureAuthenticate";
 
 /** summary */
 import { ExpenseSummaryController } from "./controllers/summary/ExpenseSummaryController";
@@ -16,30 +20,30 @@ router.get("/", (request, response) => {
   return response.json(`API Funcionando, MODO: ${process.env.NODE_ENV}`);
 });
 
-router.post("/authenticate", new CreateUserController().handle);
+router.post("/user/create", new CreateUserController().handle);
 
 /** summary */
 router.get(
   "/summary/income",
-  // ensureAuthenticate,
+  ensureAuthenticate,
   new IncomeSummaryController().handle
 );
 router.get(
   "/summary/expense",
-  // ensureAuthenticate,
+  ensureAuthenticate,
   new ExpenseSummaryController().handle
 );
 
 /** transaction */
 router.get(
   "/transactions",
-  // ensureAuthenticate,
+  ensureAuthenticate,
   new GetTransactionsController().handle
 );
 
 router.post(
   "/transaction",
-  // ensureAuthenticate,
+  ensureAuthenticate,
   new CreateTransactionController().handle
 );
 
