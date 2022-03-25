@@ -3,11 +3,15 @@ import { IncomeSummaryService } from "../../services/summary/IncomeSummaryServic
 
 class IncomeSummaryController {
   async handle(request: Request, response: Response) {
-    const { email } = request.body;
+    const { user_id } = request;
+
+    if (!user_id) {
+      return response.status(400).json({ errorCode: "Usuário não encontrado" });
+    }
 
     const transaction = new IncomeSummaryService();
 
-    const result = await transaction.execute(email);
+    const result = await transaction.execute(user_id);
 
     return response.json(result);
   }
