@@ -28,7 +28,7 @@ class CreateUserService {
       process.env.JWT_SECRET,
       {
         subject: userExist.id,
-        expiresIn: "1d",
+        expiresIn: "7d",
       }
     );
     return { token, userExist };
